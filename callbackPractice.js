@@ -7,7 +7,6 @@ Below is a sample problem
       alert(thingToSay);
    });
    
-
 and what you should write is the sayHi function that makes the code above work, 
     
     
@@ -25,7 +24,10 @@ and what you should write is the sayHi function that makes the code above work,
 
 
   //Code Here for first
-  
+function first(names, cb) {
+  return cb(names[0]);
+}
+
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
@@ -40,6 +42,9 @@ first(names, function(firstName){
 
 
   //Code Here for last
+function last(names, cb1) {
+  return cb1(names[names.length-1]);
+}
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -57,6 +62,9 @@ last(names, function(lastName){
 
 
   //Code Here for multiply
+function multiply(num1, num2, cb) {
+  return cb(num1 * num2);
+}
 
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
@@ -73,6 +81,16 @@ multiply(4, 3, function(answer){
 
 
   //Code Here for contains
+function contains(arr, str, cb) {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] === str) {
+      return cb(true);
+    }
+    else {
+      return cb(false);
+    }
+  }
+}
 
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -92,6 +110,19 @@ contains(names, 'Colt', function(result){
 
 
     //Code Here for uniq
+function uniq(arr, cb) {
+  var out = [],
+  obj = {};
+
+  for (var i = 0; i < arr.length; i++) {
+    obj[arr[i]] = 0;
+  }
+  console.log(obj)
+  for (key in obj) {
+    out.push(key);
+  }
+  return cb(out);
+}
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
@@ -107,7 +138,11 @@ uniq(names, function(uniqArr){
 
 
     //Code Here for each
-
+function each(arr, cb) {
+  for (var i = 0; i < arr.length; i++) {
+    cb(i, arr[i])
+  }
+}
 each(names, function(item, indice){
   console.log('The item in the ' + indice + ' position is ' + item)
 });
